@@ -1,0 +1,14 @@
+nav > a {
+    text-decoration: none;
+    color: black;
+    font-size: 35px;
+}
+
+li > a {
+    color: black;
+    text-decoration: none;
+}
+
+li > a :hover{
+    font-size: 60px;
+}
