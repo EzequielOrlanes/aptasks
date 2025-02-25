@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Task from "./pages/Task.js";
 import Home from "./pages/Home.js"
 
@@ -15,13 +15,12 @@ const tasks = [
 const rotation = [
   { name: "Gabriela", tasks: [3 , 1, 2, 4, 5] },
   { name: "Isabella", tasks: [1, 2, 5, 4, 3] }, 
-  { name: "Gabriel", tasks: [2, 5, 4, 3, 1] },
   { name: "Ezequiel", tasks: [5, 4, 1, 2, 3] },
-  { name: "Guilherme", tasks: [4, 3, 5, 1, 2] },
-];
+  { name: "Guilherme", tasks: [4, 3, 5, 1, 2] }];
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState(null);
+  const [loggedUser, setLoggedUser] = useState(" ");
+  
   const getCurrentWeek = () => {
     const startDate = new Date("2024-12-10"); 
     const currentDate = new Date();
@@ -32,10 +31,6 @@ function App() {
   return (
     <Router>
     <Routes>
-      <Route
-        path="/i"
-        element={<Task setLoggedUser={setLoggedUser} />}
-      />
       <Route
         path="/user"
         element={
@@ -52,8 +47,8 @@ function App() {
       />
       <Route path="/"
       element={
-      <Home/>
-      }> 
+      <Home loggedUser={loggedUser} setLoggedUser={setLoggedUser} tasks={tasks} />
+      }>
       </Route>
     </Routes>
   </Router>

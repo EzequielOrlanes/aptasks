@@ -1,0 +1,59 @@
+.tarefa-morador{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color:  white;
+    border-radius: 10px;
+    width: 350px;
+    min-height: 50px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+    
+}
+
+.status-tarefa{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color:  white;
+    border-radius: 10px;
+    width: 350px;
+    min-height: 50px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+    list-style: none;
+}
+
+.multas{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color:  white;
+    border-radius: 10px;
+    width: 350px;
+    min-height: 50px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+}
+
+.multa-button button{
+    height: 40px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: white;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+    font-family: "Bebas Neue", serif;
+
+}
+.status-button button{
+    height: 40px;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border-color: white;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+    font-family: "Bebas Neue", serif;
+
+}
+
+.status-button button :hover{
+color: aquamarine;
+}
