@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import '../style/Home.css';
 import Img from "../imagem/ap103.png";
 
-function Home({ loggedUser, setLoggedUser, tasks }) {
+function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
 
   const handleLogin = (userName) => {
     setLoggedUser(userName);
@@ -14,22 +14,25 @@ function Home({ loggedUser, setLoggedUser, tasks }) {
   }, [loggedUser]);
 
   // Filtra as tarefas com status "done"
-  const tasksDone = tasks.filter(task => task.status === "done");
-  const taskTrash = tasks.filter(task => task.name === "Chão cozinha, tanque + armário tanque, lixo")
+  const tasksDone = tasks.filter(task => task.status === true);
+  const taskTrash = rotation.filter(rotation => rotation.tasks === 5)
 
   return (
     <div>
       <main>
         <header>
-          <div className="logo">  <Link to="/"> <img src={Img} alt="logo da página" style={{ width: "30vw", height: "auto"}} /> </Link></div>
+          <div className="logo"> <Link to="/"> <img src={Img} alt="logo da página" /> </Link></div>
         </header>
         <div className='content'>
+          <h2> Moradores: </h2>
           <div className='moradores'>
             <ul>
-              <li onClick={() => handleLogin('Ezequiel')}> <Link to="/user" >Ezequiel </Link></li>
-              <li onClick={() => handleLogin('Gabriela')}> <Link to="/user" >Gabriela </Link></li>
-              <li onClick={() => handleLogin('Guilherme')}> <Link to="/user" >Guilherme </Link></li>
-              <li onClick={() => handleLogin('Isabella')}> <Link to="/user" >Isabella</Link></li>
+              <li onClick={() => handleLogin('Ezequiel')}> <Link to="/user" >Eze </Link></li>
+              <li onClick={() => handleLogin('Gabriela')}> <Link to="/user" >Gabs </Link></li>
+              <li onClick={() => handleLogin('Guilherme')}> <Link to="/user" >Guilhermo </Link></li>
+              <li onClick={() => handleLogin('Isabella')}> <Link to="/user" >Bella</Link></li>
+              <li onClick={() => handleLogin('Isella')}> <Link to="/user" >Isabella</Link></li>
+
             </ul>
           </div>
           <h2> Tarefas já feitas:  </h2>
@@ -37,17 +40,17 @@ function Home({ loggedUser, setLoggedUser, tasks }) {
             <ul>
             {tasksDone.length > 0 ? (
                 tasksDone.map((task, index) => (
-                  <li key={index}>{task.name}</li>
+                  <li key={index}>{task.task}</li>
                 ))
               ) : (
                 <li>Nenhuma tarefa concluída ainda.</li>
               )}
             </ul>
           </div>
-          <h2> Responsavél pela coleta de lixo: </h2>
+          <h2> Coleta de lixo: </h2>
           <div className='responsavel-lixo'>
-            <p> {tasksDone.length > 0 ? (
-                tasksDone.map((task, index) => (
+            <p> {taskTrash.length > 0 ? (
+                taskTrash.map((task, index) => (
                   <li key={index}>{task.name}</li>
                 ))
               ) : (
