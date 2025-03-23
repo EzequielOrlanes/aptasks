@@ -1,4 +1,4 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Img from "../imagem/ap103.png";
 import '../style/Task.css';
@@ -33,10 +33,8 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
           );
         };
         
-
     return (
         <div>
-            <main> 
             <div className="logo_task">
                 <Link to="/">
                     <img src={Img} alt="logo da página" />
@@ -70,7 +68,6 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
             </div>
             </div>
             </div>
-            </main>
         </div>
     );
 }
