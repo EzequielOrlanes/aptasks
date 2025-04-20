@@ -3,38 +3,45 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Task from "./pages/Task.js";
 import Home from "./pages/Home.js"
+import Login from './pages/Login.js';
 
 
 
 function App() {
-  const [loggedUser, setLoggedUser] = useState(" ");
-
+  const [loggedUser, setLoggedUser] = useState("");
 
   const rotation = [
-    { name: "Gabriela", tasks: [3 , 1, 2, 4, 5] },
-    { name: "Isabella", tasks: [1, 2, 5, 4, 3] }, 
-    { name: "Ezequiel", tasks: [5, 4, 1, 2, 3] },
-    { name: "Guilherme", tasks: [4, 3, 5, 1, 2] }];
+    { name: "Gabriela", tasks: [3 , 2, 1, 0] },
+    { name: "Isabella", tasks: [1, 0, 3, 2] }, 
+    { name: "Ezequiel", tasks: [2,3,0,1] },
+    { name: "Guilherme", tasks: [0, 1,2,3] }];
 
-
-  const [tasks, setTasks] = useState([  // Estado para armazenar as tarefas
+  const [tasks, setTasks] = useState([
     { task: "Sala, sofá, corredor, mesa, varanda", status: false },
     { task: "Banheiro social", status: false },
-    { task: "Banheiro quartinho + quartinho", status: false },
-    { task: "Pia, geladeira, fogão, microondas (por fora e dentro), armário baixo, airfryer (por fora)", status: false },
-    { task: "Chão cozinha, tanque + armário tanque, lixo", status: false },
+    { task: "Pia, geladeira, fogão, microondas, armários cozinha, panos de prato", status: false },
+    { task: "Chão cozinha, tanque + armário tanque, lixo, Banheiro quartinho + quartinho", status: false },
   ]);
 
   const getCurrentWeek = () => {
-    const startDate = new Date("2024-12-10"); 
+    const startDate = new Date("2024-12-06"); 
     const currentDate = new Date();
-    const weekNumber = Math.floor((currentDate - startDate) / (7 * 24 * 60 * 60 * 1000)) % 5; // Semanas rotativas
-    return weekNumber + 1;
+    const weekNumber = Math.floor((currentDate - startDate) / (7 * 24 * 60 * 60 * 1000)) % 4; // Semanas rotativas
+    return weekNumber;
   };
+
   const currentWeek = getCurrentWeek();
   return (
     <Router>
     <Routes>
+      <Route
+      path="/login"
+      element={
+      <Login/>
+      }> 
+
+
+      </Route>
       <Route
         path="/user"
         element={

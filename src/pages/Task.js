@@ -9,13 +9,12 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
     // Encontrar o usuário na rotação
     const user = rotation.find((r) => r.name === loggedUser);
     // Encontrar a tarefa correspondente ao usuário e à semana
-    const taskIndex = user ? user.tasks[currentWeek - 1] - 1 : -1; // Índice da tarefa
-    const task = taskIndex >= 0 ? tasks[taskIndex] : null;
+    const taskIndex = user.tasks && user.tasks[currentWeek - 1] !== undefined  ? user.tasks[currentWeek-1]: -1;
+    const task = taskIndex >= 0 && taskIndex < tasks.length ? tasks[taskIndex] : null;
 
-    // Atualizar o status da tarefa ao carregar
     useEffect(() => {
         if (task) {
-            setTaskStatus(task.status); 
+            setTaskStatus(task.status);
         }
     }, [task]); // O efeito depende de 'task', para atualizar quando a tarefa mudar
     // Verificar se o usuário foi encontrado
@@ -28,11 +27,11 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
 
         setTasks((prevTasks) =>
             prevTasks.map((t, index) =>
-              index === taskIndex ? { ...t, status: !taskStatus } : t
+                index === taskIndex ? { ...t, status: !taskStatus } : t
             )
-          );
-        };
-        
+        );
+    };
+
     return (
         <div>
             <div className="logo_task">
@@ -41,32 +40,32 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
                 </Link>
             </div>
             <div className="content_task">
-            <h1>Bem-vinda, {loggedUser}.</h1>
-            <h2>Sua tarefa da semana:</h2>
-            <div className="tarefa-morador">
-                <p>{task.task}</p>
-            </div>
-            <h2>Status da tarefa:</h2>
-            <div className="status-tarefa" data-status={taskStatus ? "done" : "pending"}
-            >
-                <li>
-                    {taskStatus ? 'Feita' : 'Pendente'}
-                </li>
-                <div className="status-button">
-                <button onClick={toggleTaskStatus}>
-                Alternar Status
-                </button>
-            </div>
-            </div>
-            <div className="multas_div"> 
-            <h2>Multas recebidas:</h2>
-            <div className="multas">
-                <p>Vasilhas sujas</p> {/* Exemplo de multa */}
-            </div>
-            <div className="multa-button">
-                <button>Aplicar uma multa</button>
-            </div>
-            </div>
+                <h1>Olá, {loggedUser}.</h1>
+                <h2>Sua tarefa da semana:</h2>
+                <div className="tarefa-morador">
+                    <p>{task.task}</p>
+                </div>
+                <h2>Status da tarefa:</h2>
+                <div className="status-tarefa" data-status={taskStatus ? "done" : "pending"}
+                >
+                    <li>
+                        {taskStatus ? 'Feita' : 'Pendente'}
+                    </li>
+                    <div className="status-button">
+                        <button onClick={toggleTaskStatus}>
+                            Alternar Status
+                        </button>
+                    </div>
+                </div>
+                <div className="multas_div">
+                    <h2>Multas recebidas:</h2>
+                    <div className="multas">
+                        <p>Vasilhas sujas</p> {/* Exemplo de multa */}
+                    </div>
+                    <div className="multa-button">
+                        <button>Aplicar uma multa</button>
+                    </div>
+                </div>
             </div>
         </div>
     );

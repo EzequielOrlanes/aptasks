@@ -15,7 +15,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
 
   // Filtra as tarefas com status "done"
   const tasksDone = tasks.filter(task => task.status === true);
-  const taskTrash = rotation.filter(rotation => rotation.tasks === 5)
+  const taskTrash = rotation.filter(rotation => rotation.tasks === 3)
 
   return (
     <div>
@@ -30,9 +30,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
               <li onClick={() => handleLogin('Ezequiel')}> <Link to="/user" >Eze </Link></li>
               <li onClick={() => handleLogin('Gabriela')}> <Link to="/user" >Gabs </Link></li>
               <li onClick={() => handleLogin('Guilherme')}> <Link to="/user" >Guilhermo </Link></li>
-              <li onClick={() => handleLogin('Isabella')}> <Link to="/user" >Bella</Link></li>
-              <li onClick={() => handleLogin('Isella')}> <Link to="/user" >Isabella</Link></li>
-
+              <li onClick={() => handleLogin('Isabella')}> <Link to="/user" >Bella </Link></li>
             </ul>
           </div>
           <h2> Tarefas já feitas:  </h2>
@@ -40,10 +38,12 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
             <ul>
             {tasksDone.length > 0 ? (
                 tasksDone.map((task, index) => (
-                  <li key={index}>{task.task}</li>
+                  <li key={index}>{task.task} ✅ 
+                <p style={{ fontSize: "10px", fontWeight: "2px" }}> 22/02/23, 19:34, ⭐⭐⭐⭐⭐</p>
+                  </li>
                 ))
               ) : (
-                <li>Nenhuma tarefa concluída ainda.</li>
+                <li>Nenhuma tarefa concluída ainda. 😑 </li>
               )}
             </ul>
           </div>
@@ -64,7 +64,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
           </div>
         </div>
         <footer>
-          <p> Produced by @oezequiel </p>
+          <p>Produced by @oezequiel.</p>
         </footer>
       </main>
     </div>
