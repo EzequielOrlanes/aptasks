@@ -1,0 +1,90 @@
+require('dotenv').config(); // Carrega o .env
+const express = require("express");
+
+const { initializeApp } = require("firebase/app");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
+const cors = require('cors');
+
+// Configure o CORS antes das rotas
+
+const app = express();
+app.use(express.json()); // Para parsear JSON no body das requisições
+app.use(cors({
+  origin: ['https://seu-app.netlify.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
+// Configuração do Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAhRWRui9X82y-0g2vnvys4brMgdVQt34U",
+  authDomain: "hometaskapp.firebaseapp.com",
+  projectId: "hometaskapp",
+  storageBucket: "hometaskapp.firebasestorage.app",
+  messagingSenderId: "746880386819",
+  appId: "1:746880386819:web:4bc278463460af8e1fcb36",
+  measurementId: "G-C91YN5LL1J"
+};
+
+// Inicializa o Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
+// Rota de cadastro
+app.post("/register", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email e senha são obrigatórios" });
+    }
+    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return res.status(400).json({ error: "Formato de email inválido" });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({ error: "Senha deve ter pelo menos 6 caracteres" });
+    }
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    res.status(201).json({
+      success: true,
+      user: {
+        uid: user.uid,
+        email: user.email
+      }
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+
+// Rota de login
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    
+    res.status(200).json({
+      success: true,
+      user: {
+        uid: user.uid,
+        email: user.email
+      }
+    });
+  } catch (error) {
+    res.status(401).json({
+      success: false,
+      error: error.message
+    });
+  }
+});
+console.log(process.env.NODE_ENV); // "development"
+
+// Inicia o servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
