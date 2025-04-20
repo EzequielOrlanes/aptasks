@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = process.env.NODE_ENV === 'development' 
   ? 'http://localhost:3000' // URL de desenvolvimento
-  : 'https://app103.netlify.app'; // URL de produção
+  : 'https://app103.netlify.app'; // URL de prod
 
 export const registerUser = async (email, password) => {
   try {

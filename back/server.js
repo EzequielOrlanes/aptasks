@@ -10,7 +10,8 @@ const cors = require('cors');
 const app = express();
 app.use(express.json()); // Para parsear JSON no body das requisições
 app.use(cors({
-  origin: ['https://app103.netlify.app', 'http://localhost:3000'],
+  origin: ['https://app103.netlify.app',
+   'http://localhost:3000'],
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type']
 }));
