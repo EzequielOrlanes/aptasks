@@ -35,7 +35,7 @@ function App() {
     <Router>
     <Routes>
       <Route
-      path="/login"
+      path="/"
       element={
       <Login/>
       }> 
@@ -58,7 +58,7 @@ function App() {
            )
         }
       />
-      <Route path="/"
+      <Route path="/home"
       element={
       <Home loggedUser={loggedUser} setLoggedUser={setLoggedUser} tasks={tasks} rotation={rotation}/>
       }>

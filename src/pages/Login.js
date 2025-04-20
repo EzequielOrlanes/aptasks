@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom"
+import Img from "../imagem/ap103.png";
+
 import { loginUser, registerUser } from '../services/api';
 
 const Login = () => {
@@ -14,7 +17,7 @@ const Login = () => {
         try {
             const response = await loginUser(email, password);
             console.log('Usuário logado:', response.user);
-            navigate('/');
+            navigate('/home');
         } catch (error) {
             setError(error.message || 'Erro ao fazer login');
         }
@@ -26,7 +29,7 @@ const Login = () => {
         try {
             const response = await registerUser(email, password);
             console.log('Usuário registrado:', response.user);
-            navigate('/');
+            navigate('/home');
         } catch (error) {
             setError(error.message || 'Erro ao criar conta');
         }
@@ -34,6 +37,7 @@ const Login = () => {
 
     return (
         <div style={styles.container}>
+          <div className="logo"> <Link to="/"> <img src={Img} alt="logo da página" /> </Link></div>
             <h2>Login / Criar Conta</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form style={styles.form}>

@@ -21,7 +21,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
     <div>
       <main>
         <header>
-          <div className="logo"> <Link to="/"> <img src={Img} alt="logo da página" /> </Link></div>
+          <div className="logo"> <Link to="/home"> <img src={Img} alt="logo da página" /> </Link></div>
         </header>
         <div className='content'>
           <h2> Moradores: </h2>
