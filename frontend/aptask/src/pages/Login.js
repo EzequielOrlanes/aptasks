@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom"
 import Img from "../imagem/ap103.png";
+import '../style/Login.css';
+
 
 import { loginUser, registerUser } from '../services/api';
 
@@ -38,7 +40,7 @@ const Login = () => {
     return (
         <div style={styles.container}>
           <div className="logo"> <Link to="/"> <img src={Img} alt="logo da página" /> </Link></div>
-            <h2>Login / Criar Conta</h2>
+            <h2>Login / Criar Conta </h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form style={styles.form}>
                 <div style={styles.inputGroup}>
@@ -90,8 +92,7 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100vh',
-        backgroundColor: '#f5f5f5',
+        height: '100vh'
     },
     form: {
         display: 'flex',

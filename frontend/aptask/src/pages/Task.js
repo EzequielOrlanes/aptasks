@@ -2,40 +2,63 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Img from "../imagem/ap103.png";
 import '../style/Task.css';
+import 'animate.css';
+import confetti from 'canvas-confetti';
+
 
 function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
-    // Estado local para controlar o status da tarefa
     const [taskStatus, setTaskStatus] = useState(false);
-    // Encontrar o usuário na rotação
     const user = rotation.find((r) => r.name === loggedUser);
-    // Encontrar a tarefa correspondente ao usuário e à semana
-    const taskIndex = user.tasks && user.tasks[currentWeek - 1] !== undefined  ? user.tasks[currentWeek-1]: -1;
+    const taskIndex = user.tasks && user.tasks[currentWeek - 1] !== undefined ? user.tasks[currentWeek - 1] : -1;
     const task = taskIndex >= 0 && taskIndex < tasks.length ? tasks[taskIndex] : null;
 
     useEffect(() => {
         if (task) {
             setTaskStatus(task.status);
         }
-    }, [task]); // O efeito depende de 'task', para atualizar quando a tarefa mudar
-    // Verificar se o usuário foi encontrado
-    if (!user) {
-        return <h1 className="animate__animated animate__bounce"> Usuário não encontrado, por favor tente novamente. </h1>;
-    }
-    // Função para alternar o status da tarefa
-    const toggleTaskStatus = () => {
-        setTaskStatus((prevStatus) => !prevStatus);
+    }, [task]);
 
-        setTasks((prevTasks) =>
-            prevTasks.map((t, index) =>
-                index === taskIndex ? { ...t, status: !taskStatus } : t
-            )
-        );
+    const toggleTaskStatus = () => {
+        const newStatus = !taskStatus;
+        setTaskStatus(newStatus);
+
+        if (newStatus) { // Só executa quando a tarefa é marcada como concluída (true)
+            const currentDate = new Date();
+            const formattedDateTime = `Tarefa concluída em: ${currentDate.toLocaleDateString()} às ${currentDate.toLocaleTimeString()}`;
+            
+            setTasks((prevTasks) =>
+                prevTasks.map((t, index) =>
+                    index === taskIndex
+                        ? { 
+                            ...t, 
+                            status: newStatus,
+                            data_and_time: formattedDateTime // Atualiza o campo
+                          }
+                        : t
+                )
+            );
+            // Dispara confetes
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+            });
+        } else {
+            // Se a tarefa for desmarcada  limpar a data)
+            setTasks((prevTasks) =>
+                prevTasks.map((t, index) =>
+                    index === taskIndex
+                        ? { ...t, status: newStatus }
+                        : t
+                )
+            );
+        }
     };
 
     return (
         <div>
             <div className="logo_task">
-                <Link to="/">
+                <Link to="/home">
                     <img src={Img} alt="logo da página" />
                 </Link>
             </div>
@@ -52,7 +75,13 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
                         {taskStatus ? 'Feita' : 'Pendente'}
                     </li>
                     <div className="status-button">
-                        <button onClick={toggleTaskStatus}>
+                        <button onClick={() => {
+                            toggleTaskStatus();
+                            if (!taskStatus) {
+                                const date = new Date();
+                                console.log(`Tarefa concluída em: ${date.toLocaleDateString()} às ${date.toLocaleTimeString()}`);
+                            }
+                        }}>
                             Alternar Status
                         </button>
                     </div>

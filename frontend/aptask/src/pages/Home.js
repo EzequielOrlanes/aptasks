@@ -17,12 +17,17 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
   const tasksDone = tasks.filter(task => task.status === true);
   const taskTrash = rotation.filter(rotation => rotation.tasks === 3)
 
+  const [selectedTrashPerson, setSelectedTrashPerson] = React.useState(null);
+  const handleTrashResponsibility = (person) => {
+    setSelectedTrashPerson(person);
+  };
+
   return (
     <div>
       <main>
-        <header>
-          <div className="logo"> <Link to="/home"> <img src={Img} alt="logo da página" /> </Link></div>
-        </header>
+          <div className="logo_task"> <Link to="/home"> <img src={Img} alt="logo da página" /> </Link>
+          </div>
+        
         <div className='content'>
           <h2> Moradores: </h2>
           <div className='moradores'>
@@ -39,7 +44,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
             {tasksDone.length > 0 ? (
                 tasksDone.map((task, index) => (
                   <li key={index}>{task.task} ✅ 
-                <p style={{ fontSize: "10px", fontWeight: "2px" }}> 22/02/23, 19:34, ⭐⭐⭐⭐⭐</p>
+                <p style={{ fontSize: "10px", fontWeight: "2px" }}>{task.data_and_time} </p>
                   </li>
                 ))
               ) : (
@@ -49,14 +54,32 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
           </div>
           <h2> Coleta de lixo: </h2>
           <div className='responsavel-lixo'>
-            <p> {taskTrash.length > 0 ? (
-                taskTrash.map((task, index) => (
-                  <li key={index}>{task.name}</li>
-                ))
-              ) : (
-                <li>Nenhum integrante está em casa. </li>
-              )}
-              </p>
+            <ul>
+              <li
+                onClick={() => handleTrashResponsibility('Ezequiel')}
+                className={selectedTrashPerson === 'Ezequiel' ? 'trash-selected' : ''}
+              >
+                Ezequiel {selectedTrashPerson === 'Ezequiel' && '🗑️'}
+              </li>
+              <li
+                onClick={() => handleTrashResponsibility('Gabriela')}
+                className={selectedTrashPerson === 'Gabriela' ? 'trash-selected' : ''}
+              >
+                Gabriela {selectedTrashPerson === 'Gabriela' && '🗑️'}
+              </li>
+              <li
+                onClick={() => handleTrashResponsibility('Guilherme')}
+                className={selectedTrashPerson === 'Guilherme' ? 'trash-selected' : ''}
+              >
+                Guilherme {selectedTrashPerson === 'Guilherme' && '🗑️'}
+              </li>
+              <li
+                onClick={() => handleTrashResponsibility('Isabella')}
+                className={selectedTrashPerson === 'Isabella' ? 'trash-selected' : ''}
+              >
+                Isabella {selectedTrashPerson === 'Isabella' && '🗑️'}
+              </li>
+            </ul>
           </div>
           <h2> Avisos: </h2>
           <div className='quadro-avisos'>
