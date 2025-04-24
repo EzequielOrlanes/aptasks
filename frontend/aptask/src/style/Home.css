@@ -44,7 +44,14 @@ body{
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 
 }
-
+.icon-btn {
+margin-left: 90%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 1.875em;
+}
 .logo_task img {
     margin: 0 0 0;
     width: 250px;

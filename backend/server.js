@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { initializeApp } = require("firebase/app");
-const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } = require("firebase/auth");
+const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} = require("firebase/auth");
 const cors = require('cors');
 
 // Configure o CORS antes das rotas
@@ -83,6 +83,17 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+//Rota de Logout  
+app.post("/logout", async (req, res) => {
+  try {
+    await signOut(auth);
+    res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+
 console.log(process.env.NODE_ENV); // "development"
 
 // Inicia o servidor

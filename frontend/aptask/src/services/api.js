@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 
-const API_URL = 'https://aptasks-production.up.railway.app'; // Adicione https://
+const API_URL = 'https://aptasks-production.up.railway.app'; 
 
 export const registerUser = async (email, password) => {
   try {
@@ -28,3 +28,12 @@ export const loginUser = async (email, password) => {
   }
 };
 
+
+export const logoutUser = async (auth) => {
+  try {
+    const response = await axios.post(`${API_URL}/logout`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data.error;
+  }
+}
