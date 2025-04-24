@@ -1,4 +1,3 @@
-require('dotenv').config(); // Carrega o .env
 const express = require("express");
 
 const { initializeApp } = require("firebase/app");
@@ -8,8 +7,13 @@ const cors = require('cors');
 // Configure o CORS antes das rotas
 
 const app = express();
+app.set('trust proxy', true); // Adicione isso antes das rotas
 app.use(express.json()); // Para parsear JSON no body das requisições
-app.use(cors());
+app.use(cors({
+  origin: '*', // Ou substitua '*' pelo seu domínio front-end
+  methods: ['POST', 'GET', 'OPTIONS'], // Adicione OPTIONS
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAhRWRui9X82y-0g2vnvys4brMgdVQt34U",
