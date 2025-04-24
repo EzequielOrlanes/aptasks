@@ -15,7 +15,6 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
 
   // Filtra as tarefas com status "done"
   const tasksDone = tasks.filter(task => task.status === true);
-  const taskTrash = rotation.filter(rotation => rotation.tasks === 3)
 
   const [selectedTrashPerson, setSelectedTrashPerson] = React.useState(null);
   const handleTrashResponsibility = (person) => {
