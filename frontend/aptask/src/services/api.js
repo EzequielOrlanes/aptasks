@@ -1,12 +1,12 @@
 // src/services/api.js
-import axios from 'axios';
+import api from './axiosInstance';
 
 
 const API_URL = 'https://aptasks-production.up.railway.app'; 
 
 export const registerUser = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/register`, {
+    const response = await api.post(`${API_URL}/register`, {
       email,
       password
     });
@@ -18,7 +18,7 @@ export const registerUser = async (email, password) => {
 
 export const loginUser = async (email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/login`, {
+    const response = await api.post(`${API_URL}/login`, {
       email,
       password
     });
@@ -29,9 +29,17 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = async () => {
+  const token = localStorage.getItem('token');
+
+
+
   try {
-    const response = await axios.post(`${API_URL}/logout`);
-    return response.data;
+    await api.post(`${API_URL}/logout`, null, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    localStorage.removeItem("token"); // ou onde estiver armazenado o token
   } catch (error) {
     throw error.response.data.error;
   }

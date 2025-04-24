@@ -1,4 +1,5 @@
 import { getAnalytics } from "firebase/analytics";
+const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
 
 const { initializeApp } = require("firebase/app");
@@ -71,7 +72,9 @@ app.post("/login", async (req, res) => {
     
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    
+
+    const token = await userCredential.user.getIdToken();
+    localStorage.setItem("token", token);
     res.status(200).json({
       success: true,
       user: {
@@ -86,10 +89,14 @@ app.post("/login", async (req, res) => {
     });
   }
 });
-//Rota de Logout  
-app.post("/logout", async (req, res) => {
+
+
+const admin = require('firebase-admin');
+
+app.post('/logout', authMiddleware, async (req, res) => {
   try {
-    await signOut(auth);
+    const uid = req.user.uid;
+    await admin.auth().revokeRefreshTokens(uid);
     res.status(200).json({ success: true });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
