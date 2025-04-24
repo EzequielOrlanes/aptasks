@@ -1,6 +1,8 @@
+import { getAnalytics } from "firebase/analytics";
 const express = require("express");
 
 const { initializeApp } = require("firebase/app");
+
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} = require("firebase/auth");
 const cors = require('cors');
 
@@ -28,6 +30,7 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
+const analytics = getAnalytics(app);
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
@@ -92,7 +95,6 @@ app.post("/logout", async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
-
 
 console.log(process.env.NODE_ENV); // "development"
 
