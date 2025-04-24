@@ -17,10 +17,10 @@ function App() {
     { name: "Guilherme", tasks: [0, 1,2,3] }];
 
   const [tasks, setTasks] = useState([
-    { task: "Sala, sofá, corredor, mesa, varanda", status: false },
-    { task: "Banheiro social", status: false },
-    { task: "Pia, geladeira, fogão, microondas, armários cozinha, panos de prato", status: false },
-    { task: "Chão cozinha, tanque + armário tanque, lixo, Banheiro quartinho + quartinho", status: false },
+    { task: "Sala, sofá, corredor, mesa, varanda", status: false, data_and_time: "" },
+    { task: "Banheiro social", status: false, data_and_time: ""},
+    { task: "Pia, geladeira, fogão, microondas, armários cozinha, panos de prato", status: false, data_and_time: ""},
+    { task: "Chão cozinha, tanque + armário tanque, lixo, Banheiro quartinho + quartinho", status: false, data_and_time: ""},
   ]);
 
   const getCurrentWeek = () => {
@@ -39,8 +39,6 @@ function App() {
       element={
       <Login/>
       }> 
-
-
       </Route>
       <Route
         path="/user"
