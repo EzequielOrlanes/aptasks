@@ -13,6 +13,11 @@ li > a :hover{
     font-size: 60px;
 }
 
+ul{
+    text-decoration: none;
+
+}
+
 footer{
     display: flex;
     width: 100%;
@@ -27,20 +32,45 @@ footer{
 
 }
 body{
+    display: flex;
     background-color: white;
     width: 100%;
     height: auto;
     font-size: 12px;
+    align-items: center;
+    justify-content: center;
     color: black;
     font-weight: 700;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 
 }
 
+.logo_task img {
+    margin: 0 0 0;
+    width: 250px;
+    height: auto;
+    margin-left: 13%;
+    
+}
+
+
+li > .trash-selected{
+    list-style: none;
+}
+
+.trash-selected {
+    font-size: 18px;
+    color: green; /* Cor do texto verde */
+    font-weight: bold; /* Opcional: deixa em negrito */
+    list-style: none;
+  }
+
 #header{
     display: flex;
     height: 100px;
     width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .content{
@@ -69,6 +99,10 @@ body{
 }
 .moradores li :hover{
     font-size: 25px;
+}
+
+.responsavel-lixo li {
+    list-style: none;
 }
 .tarefas-feitas{
     display: grid;
@@ -108,13 +142,6 @@ body{
     box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
 }
 
-.logo img{
-    margin: 0 0 0;
-    width: 250px;
-    height: auto;
-    margin-left: 13%;
-}
-
 
 @media (min-width: 600px) {
     .logo img {
@@ -130,9 +157,16 @@ body{
     justify-content: center;
     }
 
+
 }
 
 @media (max-width: 600px) {
+    .logo img {
+        width: 250px;
+        height: auto;
+        margin-left: 30%;
+    }
+
     body{
         display: flex;
         align-items: center;
