@@ -28,12 +28,11 @@ export const loginUser = async (email, password) => {
   }
 };
 
-
-export const logoutUser = async (auth) => {
+export const logoutUser = async () => {
   try {
     const response = await axios.post(`${API_URL}/logout`);
     return response.data;
   } catch (error) {
     throw error.response.data.error;
   }
-}
+};

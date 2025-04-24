@@ -28,12 +28,14 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
     setSelectedTrashPerson(person);
   };
 
-const handleLogout = async (loggedUser) => {
+const handleLogout = async () => {
   setError('');
  try {
-            const response = await logoutUser(loggedUser);
+            const response = await logoutUser();
             console.log('Usuário Deslogado:', response.user);
             navigate('/login');
+
+             // 5. Mostra feedback visual (opcional)
         } catch (error) {
             setError(error.message || 'Erro ao criar conta');
         }
