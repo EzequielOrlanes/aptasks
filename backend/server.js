@@ -1,4 +1,3 @@
-const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
 const { getFirestore, addDoc } = require ("firebase/firestore");
 
@@ -90,16 +89,16 @@ app.post("/login", async (req, res) => {
   }
 });
 
-const admin = require('firebase-admin');
-app.post('/logout', authMiddleware, async (req, res) => {
-  try {
-    const uid = req.user.uid;
-    await admin.auth().revokeRefreshTokens(uid);
-    res.status(200).json({ success: true });
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
-  }
-});
+// const admin = require('firebase-admin');
+// app.post('/logout', authMiddleware, async (req, res) => {
+//   try {
+//     const uid = req.user.uid;
+//     await admin.auth().revokeRefreshTokens(uid);
+//     res.status(200).json({ success: true });
+//   } catch (error) {
+//     res.status(500).json({ success: false, error: error.message });
+//   }
+// });
 
 
 app.post("/avisos", async (req, res) => {
