@@ -28,11 +28,11 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
             setTasks((prevTasks) =>
                 prevTasks.map((t, index) =>
                     index === taskIndex
-                        ? { 
-                            ...t, 
+                        ? {
+                            ...t,
                             status: newStatus,
                             data_and_time: formattedDateTime // Atualiza o campo
-                          }
+                        }
                         : t
                 )
             );
@@ -65,18 +65,14 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
                 <h1>Olá, {loggedUser}.</h1>
                 <h2>Sua tarefa da semana:</h2>
                 {task ? (
-    <div className="tarefa-morador">
-        <p>{task.task}</p>
-    </div>
-) : (
-    <div className="tarefa-morador">
-        <p>Nenhuma tarefa atribuída esta semana</p>
-    </div>
-)}
-
-                {/* <div className="tarefa-morador">
-                    <p>{task.task}</p>
-                </div> */}
+                    <div className="tarefa-morador">
+                        <p>{task.task}</p>
+                    </div>
+                ) : (
+                    <div className="tarefa-morador">
+                        <p>Nenhuma tarefa atribuída esta semana</p>
+                    </div>
+                )}
                 <h2>Status da tarefa:</h2>
                 <div className="status-tarefa" data-status={taskStatus ? "done" : "pending"}
                 >

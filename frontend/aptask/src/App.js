@@ -5,7 +5,6 @@ import Task from "./pages/Task.js";
 import Home from "./pages/Home.js"
 import Login from './pages/Login.js';
 
-
 function App() {
   const [loggedUser, setLoggedUser] = useState("");
 
@@ -23,7 +22,7 @@ function App() {
   ]);
 
   const getCurrentWeek = () => {
-    const startDate = new Date("2024-12-06"); 
+    const startDate = new Date("2024-12-25"); 
     const currentDate = new Date();
     const weekNumber = Math.floor((currentDate - startDate) / (7 * 24 * 60 * 60 * 1000)) % 4; // Semanas rotativas
     return weekNumber;
