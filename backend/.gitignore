@@ -1,6 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 hometaskapp-firebase-adminsdk-fbsvc-8216b2542f.json
-
+firebaseAdmin.js
 # dependencies
 /node_modules
 /.pnp
