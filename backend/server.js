@@ -105,8 +105,7 @@ app.post("/avisos", async (req, res) => {
       return res.status(400).json({ error: "Aviso é obrigatório" });
     }
     const docRef = await addDoc(collection(db, "avisos"), {
-       body: aviso,
-       createdAt: new Date().toISOString(),
+       body: aviso
     });
     console.log("Document written with ID: ", docRef.id)
 } catch (e) {
