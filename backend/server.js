@@ -1,20 +1,16 @@
 const express = require("express");
 const { initializeApp } = require("firebase/app");
 const { getFirestore, addDoc } = require ("firebase/firestore");
-
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} = require("firebase/auth");
 const cors = require('cors');
-
 // Configure o CORS antes das rotas
 const app = express();
 app.set('trust proxy', true); // Adicione isso antes das rotas
 app.use(express.json()); // Para parsear JSON no body das requisições
 app.use(cors({
   origin: '*', // Ou substitua '*' pelo seu domínio front-end
-  methods: ['POST', 'GET', 'OPTIONS'], // Adicione OPTIONS
-  allowedHeaders: ['Content-Type', 'Authorization']
+  methods: ['POST', 'GET', 'OPTIONS']
 }));
-
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAhRWRui9X82y-0g2vnvys4brMgdVQt34U",
@@ -25,11 +21,13 @@ const firebaseConfig = {
   appId: "1:746880386819:web:4bc278463460af8e1fcb36",
   measurementId: "G-C91YN5LL1J"
 };
-
 // Inicializa o Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(app)
+
+
+
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
