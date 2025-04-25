@@ -1,7 +1,6 @@
 const express = require("express");
-const { getFirestore, addDoc } = require ("firebase/firestore");
-
 const { initializeApp } = require("firebase/app");
+const { getFirestore, addDoc } = require ("firebase/firestore");
 
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} = require("firebase/auth");
 const cors = require('cors');
