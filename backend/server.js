@@ -1,7 +1,7 @@
 import { getAnalytics } from "firebase/analytics";
 const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, addDoc } from "firebase/firestore";
 
 const { initializeApp } = require("firebase/app");
 
@@ -93,7 +93,6 @@ app.post("/login", async (req, res) => {
   }
 });
 
-
 const admin = require('firebase-admin');
 app.post('/logout', authMiddleware, async (req, res) => {
   try {
@@ -104,6 +103,27 @@ app.post('/logout', authMiddleware, async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
+
+app.post("/avisos", async (req, res) => {
+  try {
+    const { aviso } = req.body;
+    if (!aviso) {
+      return res.status(400).json({ error: "Aviso é obrigatório" });
+    }
+    const docRef = await addDoc(collection(db, "avisos"), {
+       body: aviso,
+       createdAt: new Date().toISOString(),
+    });
+    console.log("Document written with ID: ", docRef.id)
+} catch (e) {
+    console.error("Error adding document: ", e)
+}
+});
+
+
+
+
 
 console.log(process.env.NODE_ENV); // "development"
 

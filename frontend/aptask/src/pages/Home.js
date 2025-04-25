@@ -111,6 +111,7 @@ const handleLogout = async () => {
           <div className='quadro-avisos'>
             <p> Camêras não estão funcionando.</p>
           </div>
+         
         </div>
         <footer>
           <p>Produced by @oezequiel.</p>

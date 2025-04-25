@@ -30,7 +30,6 @@ export const loginUser = async (email, password) => {
 
 export const logoutUser = async () => {
   const token = localStorage.getItem('token');
-
   try {
     await api.post(`${API_URL}/logout`, null, {
       headers: {
@@ -41,4 +40,21 @@ export const logoutUser = async () => {
   } catch (error) {
     throw error.response.data.error;
   }
+};
+
+export const AvisosSaveToDB = async (avisoData) => {
+  try {
+    const response = await api.post(
+      `${API_URL}/avisos`,
+       avisoData, 
+      {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+      return response.data;
+    } catch (error) {
+      throw error.response.data.error;
+    }
+
 };

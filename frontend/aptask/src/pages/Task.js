@@ -4,6 +4,7 @@ import Img from "../imagem/ap103.png";
 import '../style/Task.css';
 import 'animate.css';
 import confetti from 'canvas-confetti';
+import {AvisosSaveToDB} from '../services/api';
 
 
 function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
@@ -11,12 +12,28 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
     const user = rotation.find((r) => r.name === loggedUser);
     const taskIndex = user.tasks && user.tasks[currentWeek - 1] !== undefined ? user.tasks[currentWeek - 1] : -1;
     const task = taskIndex >= 0 && taskIndex < tasks.length ? tasks[taskIndex] : null;
+    const [aviso, setAviso] = useState('');
 
     useEffect(() => {
         if (task) {
             setTaskStatus(task.status);
         }
     }, [task]);
+
+
+    const handleChangeAviso = (e) => {
+        setAviso(e.target.value);
+    }
+
+    const handleAvisoSubmit = async () => {
+                try {
+                    await AvisosSaveToDB({ aviso: aviso});
+                    console.log('Aviso salvo no banco de dados com sucesso!');
+                } catch (error) {
+                    console.error('Erro ao salvar aviso no banco de dados:', error);
+                }
+    };
+
 
     const toggleTaskStatus = () => {
         const newStatus = !taskStatus;
@@ -56,6 +73,7 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
 
     return (
         <div>
+            <div className="content_task"> 
             <div className="logo_task">
                 <Link to="/home">
                     <img src={Img} alt="logo da página" />
@@ -91,17 +109,39 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
                         </button>
                     </div>
                 </div>
+
                 <div className="multas_div">
                     <h2>Multas recebidas:</h2>
-                    <div className="multas">
-                        <p>Vasilhas sujas</p> {/* Exemplo de multa */}
+                    <div className="multas_morador">
+                        <p>   Vasilhas sujas</p>
                     </div>
                     <div className="multa-button">
                         <button>Aplicar uma multa</button>
                     </div>
                 </div>
+                <div className="aviso_div">
+                    <h2>Quadro de Avisos :</h2>
+                    <div  className="avisos-input"> 
+                    <input
+                        type="text"
+                        id="meuInput"
+                        value={aviso}
+                        onChange={handleChangeAviso}
+                        placeholder="Adicionar um aviso..."
+                    />
+
+                    </div>
+                    <div className="avisos-button"> 
+                    <button onClick={handleAvisoSubmit}>Adicionar Aviso</button>
+                    </div>
+                    
+                </div>
             </div>
         </div>
+        <footer>
+          <p>Produced by @oezequiel.</p>
+        </footer>
+           </div>
     );
 }
 
