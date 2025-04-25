@@ -15,7 +15,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-const db = getFirestore(app)
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAhRWRui9X82y-0g2vnvys4brMgdVQt34U",
@@ -30,6 +29,7 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
+const db = getFirestore(app)
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
