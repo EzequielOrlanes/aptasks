@@ -45,13 +45,9 @@ export const logoutUser = async () => {
 export const AvisosSaveToDB = async (avisoData) => {
   try {
     const response = await api.post(
-      `${API_URL}/avisos`,
-       avisoData, 
-      {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    });
+      `${API_URL}/avisos`, {
+       avisoData
+      });
       return response.data;
     } catch (error) {
       throw error.response.data.error;

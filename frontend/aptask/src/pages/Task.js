@@ -27,7 +27,7 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
 
     const handleAvisoSubmit = async () => {
                 try {
-                    await AvisosSaveToDB({ aviso: aviso});
+                    await AvisosSaveToDB(aviso);
                     console.log('Aviso salvo no banco de dados com sucesso!');
                 } catch (error) {
                     console.error('Erro ao salvar aviso no banco de dados:', error);
