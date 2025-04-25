@@ -1,7 +1,6 @@
-// import { getAnalytics } from "firebase/analytics";
 const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
-import { getFirestore, addDoc } from "firebase/firestore";
+const { getFirestore, addDoc } = require ("firebase/firestore");
 
 const { initializeApp } = require("firebase/app");
 
@@ -9,7 +8,6 @@ const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sig
 const cors = require('cors');
 
 // Configure o CORS antes das rotas
-
 const app = express();
 app.set('trust proxy', true); // Adicione isso antes das rotas
 app.use(express.json()); // Para parsear JSON no body das requisições
@@ -34,7 +32,6 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
-// const analytics = getAnalytics(app);
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
