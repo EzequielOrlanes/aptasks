@@ -1,6 +1,6 @@
 const express = require("express");
 const { initializeApp } = require("firebase/app");
-const { getFirestore, addDoc } = require ("firebase/firestore");
+const { getFirestore, addDoc, collection } = require ("firebase/firestore");
 const { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} = require("firebase/auth");
 const cors = require('cors');
 // Configure o CORS antes das rotas
