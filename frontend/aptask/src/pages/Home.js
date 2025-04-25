@@ -30,6 +30,7 @@ function Home({ loggedUser, setLoggedUser, tasks, rotation }) {
 
 const handleLogout = async () => {
   setError('');
+  error('');
  try {
             const response = await logoutUser();
             console.log('Usuário Deslogado:', response.user);

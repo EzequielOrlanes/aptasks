@@ -31,8 +31,6 @@ export const loginUser = async (email, password) => {
 export const logoutUser = async () => {
   const token = localStorage.getItem('token');
 
-
-
   try {
     await api.post(`${API_URL}/logout`, null, {
       headers: {

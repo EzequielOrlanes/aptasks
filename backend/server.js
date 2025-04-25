@@ -1,6 +1,7 @@
 import { getAnalytics } from "firebase/analytics";
 const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
+import { getFirestore } from "firebase/firestore";
 
 const { initializeApp } = require("firebase/app");
 
@@ -17,6 +18,8 @@ app.use(cors({
   methods: ['POST', 'GET', 'OPTIONS'], // Adicione OPTIONS
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+const db = getFirestore(app)
 // Configuração do Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAhRWRui9X82y-0g2vnvys4brMgdVQt34U",
@@ -92,7 +95,6 @@ app.post("/login", async (req, res) => {
 
 
 const admin = require('firebase-admin');
-
 app.post('/logout', authMiddleware, async (req, res) => {
   try {
     const uid = req.user.uid;
