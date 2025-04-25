@@ -25,7 +25,6 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
         if (newStatus) { // Só executa quando a tarefa é marcada como concluída (true)
             const currentDate = new Date();
             const formattedDateTime = `Tarefa concluída em: ${currentDate.toLocaleDateString()} às ${currentDate.toLocaleTimeString()}`;
-            
             setTasks((prevTasks) =>
                 prevTasks.map((t, index) =>
                     index === taskIndex
@@ -65,9 +64,19 @@ function Task({ loggedUser, rotation, tasks, setTasks, currentWeek }) {
             <div className="content_task">
                 <h1>Olá, {loggedUser}.</h1>
                 <h2>Sua tarefa da semana:</h2>
-                <div className="tarefa-morador">
+                {task ? (
+    <div className="tarefa-morador">
+        <p>{task.task}</p>
+    </div>
+) : (
+    <div className="tarefa-morador">
+        <p>Nenhuma tarefa atribuída esta semana</p>
+    </div>
+)}
+
+                {/* <div className="tarefa-morador">
                     <p>{task.task}</p>
-                </div>
+                </div> */}
                 <h2>Status da tarefa:</h2>
                 <div className="status-tarefa" data-status={taskStatus ? "done" : "pending"}
                 >
