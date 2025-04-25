@@ -1,4 +1,4 @@
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 const authMiddleware = require('./middlewares/authMiddleware');
 const express = require("express");
 import { getFirestore, addDoc } from "firebase/firestore";
@@ -34,7 +34,7 @@ const firebaseConfig = {
 // Inicializa o Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 
 // Rota de cadastro
 app.post("/register", async (req, res) => {
